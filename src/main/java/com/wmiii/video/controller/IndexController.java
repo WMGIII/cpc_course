@@ -1,5 +1,7 @@
 package com.wmiii.video.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.tencentcloudapi.vod.v20180717.models.FileUploadTask;
 import com.wmiii.video.mapper.OptionDataMapper;
 import com.wmiii.video.mapper.TeacherMapper;
 import com.wmiii.video.mapper.WatchTimeMapper;
@@ -26,11 +28,6 @@ public class IndexController {
         return Result.success(1);
     }
 
-    @GetMapping("/return_teacher/{teacherId}")
-    Result ReturnTeacher(@PathVariable Integer teacherId) {
-        return Result.success(teacherMapper.getTeacherById(teacherId));
-    }
-
     @GetMapping("/return_choices")
     Result ReturnChoices(@RequestBody CourseVideoIdParam param) {
         return Result.success(optionDataMapper.getChoiceData(param.getCourseId(), param.getVideoId()));
@@ -39,5 +36,10 @@ public class IndexController {
     @GetMapping("/return_times")
     Result ReturnTimes(@RequestBody CourseVideoIdParam param) {
         return Result.success(null);
+    }
+
+    @PostMapping("/return_url")
+    void ReturnUrl(@RequestBody FileUploadTask fileUploadTask) {
+        System.out.println(JSON.toJSON(fileUploadTask));
     }
 }

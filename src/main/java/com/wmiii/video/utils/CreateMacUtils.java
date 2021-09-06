@@ -11,7 +11,7 @@ import java.util.Base64;
 // 签名工具类
 @Data
 @Component
-class CreateMacUtils {
+public class CreateMacUtils {
     @Value("${tencent.secretId}")
     private String secretId;
     @Value("${tencent.secretKey}")
@@ -56,6 +56,7 @@ class CreateMacUtils {
     }
 }
 
+/*
 class Test {
     public static void main(String[] args) {
         CreateMacUtils sign = new CreateMacUtils();
@@ -74,4 +75,4 @@ class Test {
             e.printStackTrace();
         }
     }
-}
+}*/

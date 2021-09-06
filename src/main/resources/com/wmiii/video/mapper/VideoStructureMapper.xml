@@ -6,7 +6,7 @@
 
     <update id="updateStructure">
         update video_structure set edge=#{edge},title=#{title}
-        where id=#{id}
+        where courseId=#{id}
     </update>
 
     <delete id="deleteStructure">

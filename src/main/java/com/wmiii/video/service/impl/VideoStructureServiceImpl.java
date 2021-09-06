@@ -27,12 +27,16 @@ public class VideoStructureServiceImpl implements VideoStructureService {
 
     @Override
     public Result storeStructure(VideoStructureParam videoStructureParam) {
-        VideoStructure videoStructure = new VideoStructure();
-        videoStructure.setCourseId(videoStructureParam.getCourseId());
-        videoStructure.setEdge(videoStructureParam.getEdge());
-        videoStructure.setTitle(videoStructureParam.getTitle());
-        videoStructureMapper.insert(videoStructure);
-        return Result.success(null);
+        if (videoStructureMapper.updateStructure(videoStructureParam.getCourseId(), videoStructureParam.getEdge(), videoStructureParam.getTitle()) == 0) {
+            VideoStructure videoStructure = new VideoStructure();
+            videoStructure.setCourseId(videoStructureParam.getCourseId());
+            videoStructure.setEdge(videoStructureParam.getEdge());
+            videoStructure.setTitle(videoStructureParam.getTitle());
+            videoStructureMapper.insert(videoStructure);
+            return Result.success("创建成功");
+        } else {
+            return Result.success("修改成功");
+        }
     }
 
     @Override
