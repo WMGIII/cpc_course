@@ -5,6 +5,7 @@ import com.wmiii.video.entity.CourseVideo;
 import com.wmiii.video.entity.Teacher;
 import com.wmiii.video.params.ErrorCode;
 import com.wmiii.video.params.Result;
+import com.wmiii.video.params.UploadVideoParam2;
 import com.wmiii.video.params.UploadVideoResultParam;
 import com.wmiii.video.service.CourseService;
 import com.wmiii.video.service.CourseVideoService;
@@ -39,6 +40,7 @@ public class UploadController {
     @Value("${qiniu.url}")
     private String qiniuUrl;
 
+    /*
     @PostMapping("/video")
     public Result uploadVideo(@RequestHeader(value="Authorization", required = false) String token, @RequestParam("file")MultipartFile[] files, @RequestParam Integer courseId) {
         Teacher teacher = teacherLoginService.checkToken(token);
@@ -69,7 +71,7 @@ public class UploadController {
                 continue;
             }
             String fileType=videoName.substring(videoName.lastIndexOf("."), videoName.length());
-            Integer videoId = courseVideoService.storeVideo(videoName, courseId, teacher.getTeacherId(), fileType, false);
+            Long videoId = courseVideoService.storeVideo(videoName, courseId, teacher.getTeacherId(), fileType, false);
 
             if (qiniuUtils.upload(file, videoId.toString() + fileType)) {
                 // String fileType=videoName.substring(videoName.lastIndexOf("."), videoName.length());
@@ -87,5 +89,10 @@ public class UploadController {
             }
         }
         return Result.success(list);
+    }*/
+
+    @PostMapping("/video")
+    public Result uploadVideo(@RequestHeader(value="Authorization", required = false) String token, @RequestBody UploadVideoParam2 param) {
+        return courseVideoService.storeVideo2(token, param);
     }
 }

@@ -18,4 +18,6 @@ public interface CourseService {
     Result getAllCourses(Integer limit);
 
     StudentCourse findStudentCourse(Integer studentId, Integer courseId);
+
+    Result deleteCourse(String token, Integer courseId);
 }

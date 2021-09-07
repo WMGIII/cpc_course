@@ -134,7 +134,7 @@ public class CourseVideoServiceImpl implements CourseVideoService {
     }*/
 
     @Override
-    public Integer storeVideo(String videoName, Integer courseId, Integer teacherId, String fileType, Boolean isRoot) {
+    public Long storeVideo(String videoName, Integer courseId, Integer teacherId, String fileType, Boolean isRoot) {
         CourseVideo courseVideo = new CourseVideo();
         courseVideo.setName(courseId + "/" + videoName);
         courseVideo.setCourseId(courseId);
@@ -150,7 +150,7 @@ public class CourseVideoServiceImpl implements CourseVideoService {
     }
 
     @Override
-    public Integer getVideoIdByOriginName(Integer courseId, String videoName) {
+    public Long getVideoIdByOriginName(Integer courseId, String videoName) {
         LambdaQueryWrapper<CourseVideo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(CourseVideo::getCourseId, courseId);
         queryWrapper.eq(CourseVideo::getName, videoName);
@@ -169,7 +169,7 @@ public class CourseVideoServiceImpl implements CourseVideoService {
     }
 
     @Override
-    public Integer deleteByVideoId(Integer videoId) {
+    public Integer deleteByVideoId(Long videoId) {
         return courseVideoMapper.deleteById(videoId);
     }
 
@@ -279,5 +279,23 @@ public class CourseVideoServiceImpl implements CourseVideoService {
         queryWrapper.last("limit 1");
 
         return courseVideoMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public Result deleteVideo(String token, Long videoId) {
+        // LambdaQueryWrapper<CourseVideo> queryWrapper = new LambdaQueryWrapper<>();
+
+        return Result.success(courseVideoMapper.deleteById(videoId));
+    }
+
+    @Override
+    public Result storeVideo2(String token, UploadVideoParam2 param) {
+        Teacher teacher = teacherService.checkToken(token);
+        CourseVideo courseVideo = new CourseVideo();
+        courseVideo.setVideoId(param.getVideoId());
+        courseVideo.setCourseId(param.getCourseId());
+        courseVideo.setUrl(param.getUrl());
+        courseVideo.setName(param.getVideoName());
+        return Result.success(courseVideoMapper.insert(courseVideo));
     }
 }

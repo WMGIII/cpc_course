@@ -139,4 +139,9 @@ public class CourseServiceImpl implements CourseService {
         // queryWrapper.last("limit " + limit);
         return Result.success(courseMapper.selectList(queryWrapper));
     }
+
+    @Override
+    public Result deleteCourse(String token, Integer courseId) {
+        return Result.success(courseMapper.deleteById(courseId));
+    }
 }

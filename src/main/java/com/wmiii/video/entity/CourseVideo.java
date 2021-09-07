@@ -9,7 +9,8 @@ import java.util.List;
 @Data
 public class CourseVideo {
     @TableId(value = "videoId", type = IdType.AUTO)
-    Integer videoId;
+    // Integer id;
+    Long videoId;
     Integer courseId;
     Integer teacherId;
     String name;

@@ -70,7 +70,17 @@ public class CourseController {
     }
 
     @PostMapping("/delete")
-    public Result deleteSection(@RequestHeader(value="Authorization", required = false) String token, @RequestParam CourseVideoParam courseVideoParam) {
+    public Result deleteSection(@RequestHeader(value="Authorization", required = false) String token, @RequestBody CourseVideoParam courseVideoParam) {
         return videoStructureService.deleteStructure(courseVideoParam, token);
+    }
+
+    @PostMapping("/delete/{videoId}")
+    public Result deleteCourseVideo(@RequestHeader(value="Authorization", required = false) String token, @PathVariable Long videoId) {
+        return courseVideoService.deleteVideo(token, videoId);
+    }
+
+    @PostMapping("/delete/course/{courseId}")
+    public Result deleteCourse(@RequestHeader(value="Authorization", required = false) String token, @PathVariable Integer courseId) {
+        return courseService.deleteCourse(token, courseId);
     }
 }
