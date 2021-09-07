@@ -10,7 +10,7 @@ import com.wmiii.video.params.UploadVideoParam2;
 import java.util.List;
 
 public interface CourseVideoService {
-    Result findVideoByVideoId(Integer videoId, String token);
+    Result findVideoByVideoId(Long videoId, String token);
 
     Result submit(UploadVideoParam uploadVideoParam, String token);
 
@@ -28,7 +28,6 @@ public interface CourseVideoService {
 
     Result getVideoList(Integer courseId, String token);
 
-    Integer setUrl(Integer videoId, String fileType);
 
     Result getRootVideo(Integer courseId, String token);
 

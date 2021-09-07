@@ -55,7 +55,7 @@ public class CourseController {
     }
 
     @PostMapping("/{courseId}/video/{videoId}")
-    public Result getStructure(@RequestHeader(value="Authorization", required = false) String token, @PathVariable Integer courseId, @PathVariable Integer videoId) {
+    public Result getStructure(@RequestHeader(value="Authorization", required = false) String token, @PathVariable Integer courseId, @PathVariable Long videoId) {
         return courseVideoService.findVideoByVideoId(videoId, token);
     }
 

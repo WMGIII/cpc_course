@@ -42,7 +42,7 @@ public class CourseVideoServiceImpl implements CourseVideoService {
     private String qiniuUrl;
 
     @Override
-    public Result findVideoByVideoId(Integer videoId, String token) {
+    public Result findVideoByVideoId(Long videoId, String token) {
         Teacher teacher;
         Student student = new Student();
         try {
@@ -62,7 +62,7 @@ public class CourseVideoServiceImpl implements CourseVideoService {
         return Result.success(findVideoUrlById(videoId));
     }
 
-    public CourseVideo findVideoById(Integer videoId) {
+    public CourseVideo findVideoById(Long videoId) {
         LambdaQueryWrapper<CourseVideo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(CourseVideo::getVideoId, videoId);
         queryWrapper.last("limit 1");
@@ -71,13 +71,13 @@ public class CourseVideoServiceImpl implements CourseVideoService {
     }
 
 
-    public String findVideoUrlById(Integer videoId) {
+    public String findVideoUrlById(Long videoId) {
         LambdaQueryWrapper<CourseVideo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(CourseVideo::getVideoId, videoId);
         queryWrapper.last("limit 1");
 
         CourseVideo courseVideo = courseVideoMapper.selectOne(queryWrapper);
-        return qiniuUrl + courseVideo.getVideoId() + courseVideo.getFileType();
+        return courseVideo.getUrl();
     }
 
     @Override
@@ -94,13 +94,15 @@ public class CourseVideoServiceImpl implements CourseVideoService {
             return Result.fail(ErrorCode.NO_PERMISSION.getCode(), ErrorCode.NO_PERMISSION.getMsg());
         }
 
+        /*
         // courseVideoMapper.updateStructure(uploadVideoParam.getVideoId(), JSON.toJSONString(uploadVideoParam.getChildren()), uploadVideoParam.getName(), uploadVideoParam.getIsRoot());
         CourseVideo courseVideo = findVideoById(uploadVideoParam.getVideoId());
         courseVideo.setChildren(JSON.toJSONString(uploadVideoParam.getChildren()));
         courseVideo.setName(uploadVideoParam.getName());
         courseVideo.setIsRoot(uploadVideoParam.getIsRoot());
 
-        return updateVideo(courseVideo);
+        return updateVideo(courseVideo);*/
+        return null;
     }
 
     public Result updateVideo(CourseVideo courseVideo) {
@@ -252,14 +254,6 @@ public class CourseVideoServiceImpl implements CourseVideoService {
         return list;
     }
 
-    @Override
-    public Integer setUrl(Integer videoId, String fileType) {
-        CourseVideo courseVideo = findVideoById(videoId);
-        courseVideo.setFileType(fileType);
-        courseVideo.setUrl(qiniuUrl + videoId + fileType);
-        updateVideo(courseVideo);
-        return 1;
-    }
 
     @Override
     public Result getRootVideo(Integer courseId, String token) {
