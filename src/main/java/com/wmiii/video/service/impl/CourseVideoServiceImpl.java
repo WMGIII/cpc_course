@@ -248,9 +248,7 @@ public class CourseVideoServiceImpl implements CourseVideoService {
         queryWrapper.eq(CourseVideo::getCourseId, courseId);
 
         List<CourseVideo> list = courseVideoMapper.selectList(queryWrapper);
-        for (CourseVideo video: list) {
-            video.setFileType(qiniuUrl + video.getVideoId() + video.getFileType());
-        }
+
         return list;
     }
 
