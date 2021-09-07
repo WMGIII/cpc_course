@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 public class CourseVideo {
-    @TableId(value = "videoId", type = IdType.AUTO)
-    // Integer id;
+    @TableId(value = "id", type = IdType.AUTO)
+    Integer id;
     Long videoId;
     Integer courseId;
     Integer teacherId;

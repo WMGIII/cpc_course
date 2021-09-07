@@ -283,9 +283,11 @@ public class CourseVideoServiceImpl implements CourseVideoService {
 
     @Override
     public Result deleteVideo(String token, Long videoId) {
-        // LambdaQueryWrapper<CourseVideo> queryWrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<CourseVideo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(CourseVideo::getVideoId, videoId);
+        queryWrapper.last("limit 1");
 
-        return Result.success(courseVideoMapper.deleteById(videoId));
+        return Result.success(courseVideoMapper.delete(queryWrapper));
     }
 
     @Override
@@ -296,6 +298,7 @@ public class CourseVideoServiceImpl implements CourseVideoService {
         courseVideo.setCourseId(param.getCourseId());
         courseVideo.setUrl(param.getUrl());
         courseVideo.setName(param.getVideoName());
+        courseVideo.setTeacherId(teacher.getTeacherId());
         return Result.success(courseVideoMapper.insert(courseVideo));
     }
 }

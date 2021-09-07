@@ -5,8 +5,8 @@
 <mapper namespace="com.wmiii.video.mapper.VideoStructureMapper">
 
     <update id="updateStructure">
-        update video_structure set edge=#{edge},title=#{title}
-        where courseId=#{id}
+        update video_structure set edge=#{edge}
+        where courseId=#{id} and title=#{title}
     </update>
 
     <delete id="deleteStructure">
