@@ -9,7 +9,7 @@ public class OptionData {
     @TableId(value = "id", type = IdType.AUTO)
     Long id;
     Integer courseId;
-    Integer videoId;
+    Long videoId;
     Integer studentId;
     Long time;
 }

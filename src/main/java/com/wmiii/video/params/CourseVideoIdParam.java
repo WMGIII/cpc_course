@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class CourseVideoIdParam {
     Integer courseId;
-    Integer videoId;
+    Long videoId;
 }

@@ -10,6 +10,6 @@ public class WatchTime {
     Long id;
     Integer studentId;
     Integer courseId;
-    Integer videoId;
+    Long videoId;
     Integer mTime;
 }

@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class WatchTimeParam {
     Integer courseId;
-    Integer videoId;
+    Long videoId;
     Integer mTime;
 }

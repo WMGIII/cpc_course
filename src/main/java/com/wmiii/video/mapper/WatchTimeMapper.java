@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface WatchTimeMapper extends BaseMapper<WatchTime> {
-    Integer updateTime(Integer studentId, Integer courseId, Integer videoId, Integer mTime);
+    Integer updateTime(Integer studentId, Integer courseId, Long videoId, Integer mTime);
 
-    StudentTimeVo getTimes(Integer courseId, Integer videoId);
+    StudentTimeVo getTimes(Integer courseId, Long videoId);
 }

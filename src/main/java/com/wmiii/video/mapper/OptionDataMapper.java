@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface OptionDataMapper extends BaseMapper<OptionData> {
-    Integer getChoiceData(Integer courseId, Integer videoId);
+    Integer getChoiceData(Integer courseId, Long videoId);
 }

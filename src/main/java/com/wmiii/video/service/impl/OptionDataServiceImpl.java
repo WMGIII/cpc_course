@@ -25,7 +25,7 @@ public class OptionDataServiceImpl implements OptionDataService {
     private OptionDataMapper optionDataMapper;
 
     @Override
-    public Result makeChoice(String token, Integer courseId, Integer videoId) {
+    public Result makeChoice(String token, Integer courseId, Long videoId) {
         Student student;
         try {
             student = studentLoginService.checkToken(token);

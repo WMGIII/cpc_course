@@ -14,7 +14,7 @@ class VideoApplicationTests {
     @Test
     void contextLoads() {
         WatchTimeParam param = new WatchTimeParam();
-        param.setVideoId(1);
+        param.setVideoId(1l);
         param.setCourseId(5);
         param.setMTime(3);
         System.out.println(JSON.toJSON(param));

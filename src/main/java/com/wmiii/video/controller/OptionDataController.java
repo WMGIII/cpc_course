@@ -15,7 +15,7 @@ public class OptionDataController {
     private OptionDataService optionDataService;
 
     @PostMapping("/{courseId}/{videoId}/option")
-    Result setChoiceData(@PathVariable Integer courseId, @PathVariable Integer videoId, @RequestHeader(value="Authorization", required = false) String token) {
+    Result setChoiceData(@PathVariable Integer courseId, @PathVariable Long videoId, @RequestHeader(value="Authorization", required = false) String token) {
 
         return optionDataService.makeChoice(token, courseId, videoId);
     }
