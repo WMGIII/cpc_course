@@ -7,11 +7,13 @@ import com.wmiii.video.params.Result;
 import com.wmiii.video.utils.CreateMacUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
 
 @RestController
+@RequestMapping("/api")
 public class SecretController {
     private CreateMacUtils sign = new CreateMacUtils();
     // 设置 App 的云 API 密钥

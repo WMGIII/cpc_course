@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/student_register")
+@RequestMapping("/api/student_register")
 public class StudentRegisterController {
 
     @Autowired
@@ -18,6 +18,7 @@ public class StudentRegisterController {
 
     @PostMapping
     public Result studentRegister(@RequestBody LoginParam loginParam) {
+        System.out.println("学生注册");
         return studentLoginService.register(loginParam);
     }
 }

@@ -276,7 +276,7 @@ public class CourseVideoServiceImpl implements CourseVideoService {
     @Override
     public Result deleteVideo(String token, Long videoId) {
         LambdaQueryWrapper<CourseVideo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(CourseVideo::getVideoId, videoId);
+        queryWrapper.eq(CourseVideo::getId, videoId);
         queryWrapper.last("limit 1");
 
         return Result.success(courseVideoMapper.delete(queryWrapper));

@@ -67,6 +67,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void save(Teacher teacher) {
+        System.out.println("ready to save...");
         this.teacherMapper.insert(teacher);
+        System.out.println("saved.");
     }
 }

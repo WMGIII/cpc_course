@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/index")
+@RequestMapping("/api/index")
 public class IndexController {
     @Autowired
     private TeacherMapper teacherMapper;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/teacher_login")
+@RequestMapping("/api/student_login")
 public class TeacherLoginController {
     @Autowired
     private TeacherLoginService teacherLoginService;

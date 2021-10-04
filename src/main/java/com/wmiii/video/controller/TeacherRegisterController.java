@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/teacher_register")
+@RequestMapping("/api/teacher_register")
 public class TeacherRegisterController {
 
     @Autowired
@@ -19,6 +19,7 @@ public class TeacherRegisterController {
 
     @PostMapping
     public Result teacherRegister(@RequestBody LoginParam loginParam) {
+        System.out.println("教师注册");
         return teacherLoginService.register(loginParam);
     }
 }

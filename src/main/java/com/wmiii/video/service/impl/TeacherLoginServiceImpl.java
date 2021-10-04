@@ -1,11 +1,13 @@
 package com.wmiii.video.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.wmiii.video.entity.Student;
 import com.wmiii.video.entity.Teacher;
 import com.wmiii.video.params.ErrorCode;
 import com.wmiii.video.params.IdentifyParams;
 import com.wmiii.video.params.LoginParam;
 import com.wmiii.video.params.Result;
+import com.wmiii.video.service.StudentService;
 import com.wmiii.video.service.TeacherLoginService;
 import com.wmiii.video.service.TeacherService;
 import com.wmiii.video.utils.JWTUtils;
@@ -29,9 +31,12 @@ public class TeacherLoginServiceImpl implements TeacherLoginService {
     private TeacherService teacherService;
 
     @Autowired
+    private StudentService studentService;
+
+    @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    private static final String salt = "678^&*";
+    private static final String salt = "123!@#";
 
     @Override
     public Result teacherLogin(LoginParam loginParam) {
@@ -42,11 +47,19 @@ public class TeacherLoginServiceImpl implements TeacherLoginService {
         }
 
         pwd = DigestUtils.md5Hex(pwd + salt);
+        Student student;
+        String token;
         Teacher teacher = teacherService.findTeacherLogin(email, pwd);
         if (teacher == null) {
-            return Result.fail(ErrorCode.ACCOUNT_PWD_NOT_EXIST.getCode(), ErrorCode.ACCOUNT_PWD_NOT_EXIST.getMsg());
+            student = studentService.findStudentLogin(email, pwd);
+            if (student == null) {
+                return Result.fail(ErrorCode.ACCOUNT_PWD_NOT_EXIST.getCode(), ErrorCode.ACCOUNT_PWD_NOT_EXIST.getMsg());
+            }
+            token = JWTUtils.createToken(student.getStudentId(), IdentifyParams.jwtSToken);
+            redisTemplate.opsForValue().set("TOKEN_" + token, JSON.toJSONString(student), 1, TimeUnit.DAYS);
+            return Result.success(token);
         }
-        String token = JWTUtils.createToken(teacher.getTeacherId(), IdentifyParams.jwtTToken);
+        token = JWTUtils.createToken(teacher.getTeacherId(), IdentifyParams.jwtTToken);
         redisTemplate.opsForValue().set("TOKEN_" + token, JSON.toJSONString(teacher), 1, TimeUnit.DAYS);
 
         return Result.success(token);
@@ -74,6 +87,7 @@ public class TeacherLoginServiceImpl implements TeacherLoginService {
 
     @Override
     public Result register(LoginParam loginParam) {
+        System.out.println("教师注册");
         String email = loginParam.getEmail();
         String pwd = loginParam.getPwd();
         if (StringUtils.isBlank(email) || StringUtils.isBlank(pwd)) {

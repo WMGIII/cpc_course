@@ -22,7 +22,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/upload")
+@RequestMapping("/api/upload")
 public class UploadController {
     @Autowired
     private QiniuUtils qiniuUtils;
