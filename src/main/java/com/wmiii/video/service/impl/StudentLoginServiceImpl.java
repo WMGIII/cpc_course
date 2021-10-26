@@ -74,7 +74,7 @@ public class StudentLoginServiceImpl implements StudentLoginService {
 
     @Override
     public Result register(LoginParam loginParam) {
-        System.out.println("学生注册");
+        // System.out.println("学生注册");
         String email = loginParam.getEmail();
         String pwd = loginParam.getPwd();
         if (StringUtils.isBlank(email) || StringUtils.isBlank(pwd)) {
